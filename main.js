@@ -19,7 +19,7 @@ const startingPoint = new THREE.BoxGeometry(10,1,10);
 const material = new THREE.MeshStandardMaterial({color: 0xFF6347});
 const shape = new THREE.Mesh(startingPoint,material);
 shape.position.setY(-19.5);
-shape.position.setZ(85);
+shape.position.setZ(75);
 scene.add(shape);
 //ceiling
 const top = new THREE.BoxGeometry(200,1,200);
@@ -68,11 +68,11 @@ const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
 //grid helper
-const gridHelper = new THREE.GridHelper(200,50);
+/*const gridHelper = new THREE.GridHelper(200,50);
 gridHelper.position.setY(0);
 gridHelper.position.setZ(0);
 scene.add(gridHelper);
-
+*/
 const gridHelper2 = new THREE.GridHelper(200,50);
 gridHelper2.position.setY(-20);
 gridHelper2.position.setZ(0);
@@ -80,8 +80,25 @@ scene.add(gridHelper2);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
+document.addEventListener('keydown',(e) =>{
+  if(e.code ==="ArrowUp"){
+    camera.position.setZ(camera.position.z-1);
+  }else if(e.code ==="ArrowDown"){
+    camera.position.setZ(camera.position.z +1);
+  }else if(e.code ==="ArrowLeft"){
+    camera.position.setX(camera.position.x-1);
+  }else if(e.code === "ArrowRight"){
+    camera.position.setX(camera.position.x+1);
+  }else if(e.code ==="KeyA"){
+    camera.rotation.y +=0.1;
+  }else if(e.code === "KeyD"){
+    camera.rotation.y -=0.1;
+  }
+}); 
+
 function animate(){
   requestAnimationFrame(animate);
+ 
   /*shape.rotation.x += 0.01;
   shape.rotation.y += 0.005;
   shape.rotation.z += 0.01;*/
